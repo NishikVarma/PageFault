@@ -5,12 +5,16 @@ import {
     detectMissingDescription,
     detectBrokenLinks,
     detectButtonWithNoTextLabels,
-    detectLinkWithDuplicateValues
+    detectLinkWithDuplicateValues,
+    detectMultipleHeading,
+    detectHeadingHeirarchyViolation,
+    detectUnlabelledFormFields
 } from './detectors/index';
 
 const urls = [
-    "https://onlinesbi.sbi.bank.in/",
-    "https://www.google.com"
+    // "https://onlinesbi.sbi.bank.in/",
+    // "https://www.google.com"
+    "https://www.w3schools.com/html/html_forms.asp"
 ];
 
 const detectors = [
@@ -18,7 +22,10 @@ const detectors = [
     detectMissingDescription,
     detectBrokenLinks,
     detectButtonWithNoTextLabels,
-    detectLinkWithDuplicateValues
+    detectLinkWithDuplicateValues,
+    detectMultipleHeading,
+    detectHeadingHeirarchyViolation,
+    detectUnlabelledFormFields
 ];
 
 (async () => {
@@ -33,6 +40,7 @@ const detectors = [
         console.log("Checking: " + title);
         const snapshot = await page.locator('body').ariaSnapshot();
 
+        // console.log(snapshot);
         for (const detector of detectors) {
             detector(issues, snapshot, url);
         }
