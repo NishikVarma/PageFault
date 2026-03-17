@@ -1,0 +1,119 @@
+{
+  "generatedAt": "2026-03-17T18:51:20.806Z",
+  "totalIssues": 23,
+  "pages": [
+    {
+      "url": "https://onlinesbi.sbi.bank.in/",
+      "title": "State Bank of India",
+      "issueCount": 10,
+      "issues": [
+        {
+          "element": "- link \"hidden\":",
+          "issue": "Non-descriptive link label"
+        },
+        {
+          "element": "- link \"Services\":",
+          "issue": "Non-functional or JS-dependent link"
+        },
+        {
+          "element": "- link \"FAQ\":",
+          "issue": "Non-functional or JS-dependent link"
+        },
+        {
+          "element": "- link \"SBIePay Lite\":",
+          "issue": "Non-functional or JS-dependent link"
+        },
+        {
+          "element": "- link \"OnlineSBI VIDEOS\":",
+          "issue": "Non-functional or JS-dependent link"
+        },
+        {
+          "element": "- link \"Apply for SB/ Current Account\":",
+          "issue": "Non-functional or JS-dependent link"
+        },
+        {
+          "element": "- link \"NPS\":",
+          "issue": "Non-functional or JS-dependent link"
+        },
+        {
+          "element": "- link \"SBI Loans\":",
+          "issue": "Non-functional or JS-dependent link"
+        },
+        {
+          "element": "- link \"Lock & Unlock User\":",
+          "issue": "Non-functional or JS-dependent link"
+        },
+        {
+          "element": "- link \"More Useful Links\":",
+          "issue": "Non-functional or JS-dependent link"
+        }
+      ]
+    },
+    {
+      "url": "https://www.google.com",
+      "title": "Google",
+      "issueCount": 1,
+      "issues": [
+        {
+          "element": "- img",
+          "issue": "No alt text provided for image"
+        }
+      ]
+    },
+    {
+      "url": "https://www.w3schools.com/html/html_forms.asp",
+      "title": "HTML Forms",
+      "issueCount": 12,
+      "issues": [
+        {
+          "element": "- img",
+          "issue": "No alt text provided for image"
+        },
+        {
+          "element": "- img",
+          "issue": "No alt text provided for image"
+        },
+        {
+          "element": "- link \"HTML URL Encode\":",
+          "issue": "Duplicate link label pointing to different URLs"
+        },
+        {
+          "element": "- link \"HTML Colors\":",
+          "issue": "Duplicate link label pointing to different URLs"
+        },
+        {
+          "element": "- link \"HTML Examples\":",
+          "issue": "Duplicate link label pointing to different URLs"
+        },
+        {
+          "element": "- link \"HTML Certificate\":",
+          "issue": "Duplicate link label pointing to different URLs"
+        },
+        {
+          "element": "- heading \"Example\" [level=3]",
+          "issue": "Heading heirarchy has been violated"
+        },
+        {
+          "element": "- heading \"COLOR PICKER\" [level=4]:",
+          "issue": "Heading heirarchy has been violated"
+        },
+        {
+          "element": "- textbox",
+          "issue": "Form field is unlabelled"
+        },
+        {
+          "element": "- textbox",
+          "issue": "Form field is unlabelled"
+        },
+        {
+          "element": "- textbox: John",
+          "issue": "Form field is unlabelled"
+        },
+        {
+          "element": "- textbox: Doe",
+          "issue": "Form field is unlabelled"
+        }
+      ]
+    }
+  ]
+}

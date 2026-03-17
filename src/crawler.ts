@@ -1,52 +1,79 @@
-import { firefox } from 'playwright';
-import { Issue } from './types';
+import { firefox } from "playwright";
+import { Issue, PageReport, Report } from "./types";
+
+import fs from "fs";
+
+const filePath = "../bug-hygiene-engine/reports/report.json";
+
 import {
-    detectVagueLinkText,
-    detectMissingDescription,
-    detectBrokenLinks,
-    detectButtonWithNoTextLabels,
-    detectLinkWithDuplicateValues,
-    detectMultipleHeading,
-    detectHeadingHeirarchyViolation,
-    detectUnlabelledFormFields
-} from './detectors/index';
+  detectVagueLinkText,
+  detectMissingDescription,
+  detectBrokenLinks,
+  detectButtonWithNoTextLabels,
+  detectLinkWithDuplicateValues,
+  detectMultipleHeading,
+  detectHeadingHeirarchyViolation,
+  detectUnlabelledFormFields,
+} from "./detectors/index";
 
 const urls = [
-    // "https://onlinesbi.sbi.bank.in/",
-    // "https://www.google.com"
-    "https://www.w3schools.com/html/html_forms.asp"
+  "https://onlinesbi.sbi.bank.in/",
+  "https://www.google.com",
+  "https://www.w3schools.com/html/html_forms.asp",
 ];
 
 const detectors = [
-    detectVagueLinkText,
-    detectMissingDescription,
-    detectBrokenLinks,
-    detectButtonWithNoTextLabels,
-    detectLinkWithDuplicateValues,
-    detectMultipleHeading,
-    detectHeadingHeirarchyViolation,
-    detectUnlabelledFormFields
+  detectVagueLinkText,
+  detectMissingDescription,
+  detectBrokenLinks,
+  detectButtonWithNoTextLabels,
+  detectLinkWithDuplicateValues,
+  detectMultipleHeading,
+  detectHeadingHeirarchyViolation,
+  detectUnlabelledFormFields,
 ];
 
 (async () => {
-    const browser = await firefox.launch();
-    const page = await browser.newPage();
+  const browser = await firefox.launch();
+  const page = await browser.newPage();
 
-    const issues: Issue[] = [];
+  const pages: PageReport[] = [];
+  var totIssue = 0;
 
-    for (const url of urls) {
-        await page.goto(url);
-        const title = await page.title();
-        console.log("Checking: " + title);
-        const snapshot = await page.locator('body').ariaSnapshot();
+  for (const url of urls) {
+    await page.goto(url);
+    const title = await page.title();
+    console.log("Checking: " + title);
+    const snapshot = await page.locator("body").ariaSnapshot();
 
-        // console.log(snapshot);
-        for (const detector of detectors) {
-            detector(issues, snapshot, url);
-        }
+    const pageIssues: Issue[] = [];
+
+    for (const detector of detectors) {
+      detector(pageIssues, snapshot);
     }
 
-    console.log(issues);
+    pages.push({
+      url: url,
+      title: title,
+      issueCount: pageIssues.length,
+      issues: pageIssues,
+    });
+    totIssue += pageIssues.length;
+  }
 
-    await browser.close();
+  const report: Report = {
+    generatedAt: new Date().toISOString(),
+    totalIssues: totIssue,
+    pages: pages,
+  };
+  const jsonData = JSON.stringify(report, null, 2);
+
+  try {
+    fs.writeFileSync(filePath, jsonData);
+    console.log("Report written successfully");
+  } catch (err) {
+    console.log("Error writing file: " + err);
+  }
+
+  await browser.close();
 })();
