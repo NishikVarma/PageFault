@@ -15,6 +15,7 @@ export function detectButtonWithNoTextLabels(
           issues.push({
             element: line.trim(),
             issue: "Button with no text label",
+            severity: "low"
           });
         }
       }

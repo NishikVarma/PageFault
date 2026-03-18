@@ -1,117 +1,143 @@
 {
-  "generatedAt": "2026-03-17T18:51:20.806Z",
+  "generatedAt": "2026-03-18T18:36:14.884Z",
   "totalIssues": 23,
   "pages": [
     {
       "url": "https://onlinesbi.sbi.bank.in/",
       "title": "State Bank of India",
+      "score": 5,
       "issueCount": 10,
       "issues": [
         {
           "element": "- link \"hidden\":",
-          "issue": "Non-descriptive link label"
+          "issue": "Non-descriptive link label",
+          "severity": "medium"
         },
         {
           "element": "- link \"Services\":",
-          "issue": "Non-functional or JS-dependent link"
+          "issue": "Non-functional or JS-dependent link",
+          "severity": "high"
         },
         {
           "element": "- link \"FAQ\":",
-          "issue": "Non-functional or JS-dependent link"
+          "issue": "Non-functional or JS-dependent link",
+          "severity": "high"
         },
         {
           "element": "- link \"SBIePay Lite\":",
-          "issue": "Non-functional or JS-dependent link"
+          "issue": "Non-functional or JS-dependent link",
+          "severity": "high"
         },
         {
           "element": "- link \"OnlineSBI VIDEOS\":",
-          "issue": "Non-functional or JS-dependent link"
+          "issue": "Non-functional or JS-dependent link",
+          "severity": "high"
         },
         {
           "element": "- link \"Apply for SB/ Current Account\":",
-          "issue": "Non-functional or JS-dependent link"
+          "issue": "Non-functional or JS-dependent link",
+          "severity": "high"
         },
         {
           "element": "- link \"NPS\":",
-          "issue": "Non-functional or JS-dependent link"
+          "issue": "Non-functional or JS-dependent link",
+          "severity": "high"
         },
         {
           "element": "- link \"SBI Loans\":",
-          "issue": "Non-functional or JS-dependent link"
+          "issue": "Non-functional or JS-dependent link",
+          "severity": "high"
         },
         {
           "element": "- link \"Lock & Unlock User\":",
-          "issue": "Non-functional or JS-dependent link"
+          "issue": "Non-functional or JS-dependent link",
+          "severity": "high"
         },
         {
           "element": "- link \"More Useful Links\":",
-          "issue": "Non-functional or JS-dependent link"
+          "issue": "Non-functional or JS-dependent link",
+          "severity": "high"
         }
       ]
     },
     {
       "url": "https://www.google.com",
       "title": "Google",
+      "score": 95,
       "issueCount": 1,
       "issues": [
         {
           "element": "- img",
-          "issue": "No alt text provided for image"
+          "issue": "No alt text provided for image",
+          "severity": "medium"
         }
       ]
     },
     {
       "url": "https://www.w3schools.com/html/html_forms.asp",
       "title": "HTML Forms",
+      "score": 26,
       "issueCount": 12,
       "issues": [
         {
           "element": "- img",
-          "issue": "No alt text provided for image"
+          "issue": "No alt text provided for image",
+          "severity": "medium"
         },
         {
           "element": "- img",
-          "issue": "No alt text provided for image"
+          "issue": "No alt text provided for image",
+          "severity": "medium"
         },
         {
           "element": "- link \"HTML URL Encode\":",
-          "issue": "Duplicate link label pointing to different URLs"
+          "issue": "Duplicate link label pointing to different URLs",
+          "severity": "medium"
         },
         {
           "element": "- link \"HTML Colors\":",
-          "issue": "Duplicate link label pointing to different URLs"
+          "issue": "Duplicate link label pointing to different URLs",
+          "severity": "medium"
         },
         {
           "element": "- link \"HTML Examples\":",
-          "issue": "Duplicate link label pointing to different URLs"
+          "issue": "Duplicate link label pointing to different URLs",
+          "severity": "medium"
         },
         {
           "element": "- link \"HTML Certificate\":",
-          "issue": "Duplicate link label pointing to different URLs"
+          "issue": "Duplicate link label pointing to different URLs",
+          "severity": "medium"
         },
         {
           "element": "- heading \"Example\" [level=3]",
-          "issue": "Heading heirarchy has been violated"
+          "issue": "Heading heirarchy has been violated",
+          "severity": "low"
         },
         {
           "element": "- heading \"COLOR PICKER\" [level=4]:",
-          "issue": "Heading heirarchy has been violated"
+          "issue": "Heading heirarchy has been violated",
+          "severity": "low"
         },
         {
           "element": "- textbox",
-          "issue": "Form field is unlabelled"
+          "issue": "Form field is unlabelled",
+          "severity": "high"
         },
         {
           "element": "- textbox",
-          "issue": "Form field is unlabelled"
+          "issue": "Form field is unlabelled",
+          "severity": "high"
         },
         {
           "element": "- textbox: John",
-          "issue": "Form field is unlabelled"
+          "issue": "Form field is unlabelled",
+          "severity": "high"
         },
         {
           "element": "- textbox: Doe",
-          "issue": "Form field is unlabelled"
+          "issue": "Form field is unlabelled",
+          "severity": "high"
         }
       ]
     }

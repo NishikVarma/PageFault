@@ -55,6 +55,7 @@ const detectors = [
     pages.push({
       url: url,
       title: title,
+      score: calculateScore(pageIssues),
       issueCount: pageIssues.length,
       issues: pageIssues,
     });
@@ -77,3 +78,19 @@ const detectors = [
 
   await browser.close();
 })();
+
+function calculateScore(issues: Issue[]): number{
+  var score = 100;
+  for(const issue of issues){
+    if(issue.severity == "high"){
+      score = score - 10;
+    }else if(issue.severity == "medium"){
+      score = score - 5;
+    }else{
+      score = score - 2;
+    }
+  }
+
+  score = Math.max(0, score);
+  return score;
+}

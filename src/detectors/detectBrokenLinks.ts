@@ -9,11 +9,13 @@ export function detectBrokenLinks(issues: Issue[], snapshot: string) {
         issues.push({
           element: lines[i].trim(),
           issue: "No URL for link given",
+          severity: "high"
         });
       } else if (afterColon.trim() === "javascript:void(0)") {
         issues.push({
           element: lines[i].trim(),
           issue: "Non-functional or JS-dependent link",
+          severity: "high"
         });
       }
     }

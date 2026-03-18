@@ -58,6 +58,7 @@ export function detectLinkWithDuplicateValues(
           issues.push({
             element: lines[i].trim(),
             issue: "Duplicate link label pointing to different URLs",
+            severity: "medium"
           });
         }
       }

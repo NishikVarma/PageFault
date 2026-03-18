@@ -10,7 +10,7 @@ export function detectUnlabelledFormFields(issues: Issue[], snapshot: string) {
       line.includes("- checkbox")
     ) {
       if (!line.includes('"')) {
-        issues.push({ element: line, issue: "Form field is unlabelled" });
+        issues.push({ element: line, issue: "Form field is unlabelled", severity: "high"});
       }
     }
   }

@@ -15,6 +15,7 @@ export function detectMultipleHeading(issues: Issue[], snapshot: string) {
     issues.push({
       element: `${count} headings found`,
       issue: "Multiple h1 headings on a single page",
+      severity: "low"
     });
   }
 }

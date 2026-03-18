@@ -8,6 +8,7 @@ export function detectMissingDescription(issues: Issue[], snapshot: string) {
         issues.push({
           element: line.trim(),
           issue: "No alt text provided for image",
+          severity: "medium"
         });
       }
     } else if (line.includes("- link")) {
@@ -15,6 +16,7 @@ export function detectMissingDescription(issues: Issue[], snapshot: string) {
         issues.push({
           element: line.trim(),
           issue: "Non-descriptive link label",
+          severity: "medium"
         });
       }
     }

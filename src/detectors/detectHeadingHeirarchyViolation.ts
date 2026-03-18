@@ -28,6 +28,7 @@ export function detectHeadingHeirarchyViolation(
           issues.push({
             element: line,
             issue: "Heading heirarchy has been violated",
+            severity: "low"
           });
         }
         previousLevel = currentLevel;
