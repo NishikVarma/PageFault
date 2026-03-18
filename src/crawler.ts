@@ -1,10 +1,6 @@
 import { firefox } from "playwright";
 import { Issue, PageReport, Report } from "./types";
-
-import fs from "fs";
-
-const filePath = "../bug-hygiene-engine/reports/report.json";
-
+import { program } from "commander";
 import {
   detectVagueLinkText,
   detectMissingDescription,
@@ -16,15 +12,19 @@ import {
   detectUnlabelledFormFields,
 } from "./detectors/index";
 
-const urls = [
-  // "https://onlinesbi.sbi.bank.in/",
-  "https://www.google.com",
-  // "https://www.w3schools.com/html/html_forms.asp",
-];
+import fs from "fs";
+const filePath = "../bug-hygiene-engine/reports/report.json";
 
-const stack = urls.map(url => ({url, depth: 0}));
+program
+  .argument('<url>', 'URL to crawl')
+  .option('-d, --depth <number>', 'crawl number', '1')
+  .parse();
+
+const url = program.args[0];
+const maxdepth = parseInt(program.opts().depth);
+
+const stack = [{url, depth: 0}];
 const visited = new Set<string>();
-const maxdepth = 1;
 
 const detectors = [
   detectVagueLinkText,
