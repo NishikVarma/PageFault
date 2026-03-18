@@ -1,65 +1,7 @@
 {
-  "generatedAt": "2026-03-18T18:36:14.884Z",
-  "totalIssues": 23,
+  "generatedAt": "2026-03-18T19:22:11.875Z",
+  "totalIssues": 12,
   "pages": [
-    {
-      "url": "https://onlinesbi.sbi.bank.in/",
-      "title": "State Bank of India",
-      "score": 5,
-      "issueCount": 10,
-      "issues": [
-        {
-          "element": "- link \"hidden\":",
-          "issue": "Non-descriptive link label",
-          "severity": "medium"
-        },
-        {
-          "element": "- link \"Services\":",
-          "issue": "Non-functional or JS-dependent link",
-          "severity": "high"
-        },
-        {
-          "element": "- link \"FAQ\":",
-          "issue": "Non-functional or JS-dependent link",
-          "severity": "high"
-        },
-        {
-          "element": "- link \"SBIePay Lite\":",
-          "issue": "Non-functional or JS-dependent link",
-          "severity": "high"
-        },
-        {
-          "element": "- link \"OnlineSBI VIDEOS\":",
-          "issue": "Non-functional or JS-dependent link",
-          "severity": "high"
-        },
-        {
-          "element": "- link \"Apply for SB/ Current Account\":",
-          "issue": "Non-functional or JS-dependent link",
-          "severity": "high"
-        },
-        {
-          "element": "- link \"NPS\":",
-          "issue": "Non-functional or JS-dependent link",
-          "severity": "high"
-        },
-        {
-          "element": "- link \"SBI Loans\":",
-          "issue": "Non-functional or JS-dependent link",
-          "severity": "high"
-        },
-        {
-          "element": "- link \"Lock & Unlock User\":",
-          "issue": "Non-functional or JS-dependent link",
-          "severity": "high"
-        },
-        {
-          "element": "- link \"More Useful Links\":",
-          "issue": "Non-functional or JS-dependent link",
-          "severity": "high"
-        }
-      ]
-    },
     {
       "url": "https://www.google.com",
       "title": "Google",
@@ -74,70 +16,152 @@
       ]
     },
     {
-      "url": "https://www.w3schools.com/html/html_forms.asp",
-      "title": "HTML Forms",
-      "score": 26,
-      "issueCount": 12,
+      "url": "https://www.google.com/services/?subid=ww-ww-et-g-awa-a-g_hpbfoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpbfooter&fg=1",
+      "title": "Get Listed on Google - Google Business Profile",
+      "score": 95,
+      "issueCount": 1,
+      "issues": [
+        {
+          "element": "- link \"Start now\":",
+          "issue": "Duplicate link label pointing to different URLs",
+          "severity": "medium"
+        }
+      ]
+    },
+    {
+      "url": "https://www.google.com/intl/en_in/ads/?subid=ww-ww-et-g-awa-a-g_hpafoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpafooter&fg=1",
+      "title": "Google Ads - Reach Customers & Sell More with Online Advertising",
+      "score": 100,
+      "issueCount": 0,
+      "issues": []
+    },
+    {
+      "url": "https://www.google.com/setprefs?sig=0_3XGngShWjZswx2rFMca8iB7ODOE%3D&hl=pa&source=homepage&sa=X&ved=0ahUKEwiz-53rlaqTAxUURWcHHaeCDYAQ2ZgBCCg",
+      "title": "Google",
+      "score": 95,
+      "issueCount": 1,
       "issues": [
         {
           "element": "- img",
           "issue": "No alt text provided for image",
           "severity": "medium"
-        },
+        }
+      ]
+    },
+    {
+      "url": "https://www.google.com/setprefs?sig=0_3XGngShWjZswx2rFMca8iB7ODOE%3D&hl=ml&source=homepage&sa=X&ved=0ahUKEwiz-53rlaqTAxUURWcHHaeCDYAQ2ZgBCCc",
+      "title": "Google",
+      "score": 95,
+      "issueCount": 1,
+      "issues": [
         {
           "element": "- img",
           "issue": "No alt text provided for image",
           "severity": "medium"
-        },
+        }
+      ]
+    },
+    {
+      "url": "https://www.google.com/setprefs?sig=0_3XGngShWjZswx2rFMca8iB7ODOE%3D&hl=kn&source=homepage&sa=X&ved=0ahUKEwiz-53rlaqTAxUURWcHHaeCDYAQ2ZgBCCY",
+      "title": "Google",
+      "score": 95,
+      "issueCount": 1,
+      "issues": [
         {
-          "element": "- link \"HTML URL Encode\":",
-          "issue": "Duplicate link label pointing to different URLs",
+          "element": "- img",
+          "issue": "No alt text provided for image",
           "severity": "medium"
-        },
+        }
+      ]
+    },
+    {
+      "url": "https://www.google.com/setprefs?sig=0_3XGngShWjZswx2rFMca8iB7ODOE%3D&hl=gu&source=homepage&sa=X&ved=0ahUKEwiz-53rlaqTAxUURWcHHaeCDYAQ2ZgBCCU",
+      "title": "Google",
+      "score": 95,
+      "issueCount": 1,
+      "issues": [
         {
-          "element": "- link \"HTML Colors\":",
-          "issue": "Duplicate link label pointing to different URLs",
+          "element": "- img",
+          "issue": "No alt text provided for image",
           "severity": "medium"
-        },
+        }
+      ]
+    },
+    {
+      "url": "https://www.google.com/setprefs?sig=0_3XGngShWjZswx2rFMca8iB7ODOE%3D&hl=ta&source=homepage&sa=X&ved=0ahUKEwiz-53rlaqTAxUURWcHHaeCDYAQ2ZgBCCQ",
+      "title": "Google",
+      "score": 95,
+      "issueCount": 1,
+      "issues": [
         {
-          "element": "- link \"HTML Examples\":",
-          "issue": "Duplicate link label pointing to different URLs",
+          "element": "- img",
+          "issue": "No alt text provided for image",
           "severity": "medium"
-        },
+        }
+      ]
+    },
+    {
+      "url": "https://www.google.com/setprefs?sig=0_3XGngShWjZswx2rFMca8iB7ODOE%3D&hl=mr&source=homepage&sa=X&ved=0ahUKEwiz-53rlaqTAxUURWcHHaeCDYAQ2ZgBCCM",
+      "title": "Google",
+      "score": 95,
+      "issueCount": 1,
+      "issues": [
         {
-          "element": "- link \"HTML Certificate\":",
-          "issue": "Duplicate link label pointing to different URLs",
+          "element": "- img",
+          "issue": "No alt text provided for image",
           "severity": "medium"
-        },
+        }
+      ]
+    },
+    {
+      "url": "https://www.google.com/setprefs?sig=0_3XGngShWjZswx2rFMca8iB7ODOE%3D&hl=te&source=homepage&sa=X&ved=0ahUKEwiz-53rlaqTAxUURWcHHaeCDYAQ2ZgBCCI",
+      "title": "Google",
+      "score": 95,
+      "issueCount": 1,
+      "issues": [
         {
-          "element": "- heading \"Example\" [level=3]",
-          "issue": "Heading heirarchy has been violated",
-          "severity": "low"
-        },
+          "element": "- img",
+          "issue": "No alt text provided for image",
+          "severity": "medium"
+        }
+      ]
+    },
+    {
+      "url": "https://www.google.com/setprefs?sig=0_3XGngShWjZswx2rFMca8iB7ODOE%3D&hl=bn&source=homepage&sa=X&ved=0ahUKEwiz-53rlaqTAxUURWcHHaeCDYAQ2ZgBCCE",
+      "title": "Google",
+      "score": 95,
+      "issueCount": 1,
+      "issues": [
         {
-          "element": "- heading \"COLOR PICKER\" [level=4]:",
-          "issue": "Heading heirarchy has been violated",
-          "severity": "low"
-        },
+          "element": "- img",
+          "issue": "No alt text provided for image",
+          "severity": "medium"
+        }
+      ]
+    },
+    {
+      "url": "https://www.google.com/setprefs?sig=0_3XGngShWjZswx2rFMca8iB7ODOE%3D&hl=hi&source=homepage&sa=X&ved=0ahUKEwiz-53rlaqTAxUURWcHHaeCDYAQ2ZgBCCA",
+      "title": "Google",
+      "score": 95,
+      "issueCount": 1,
+      "issues": [
         {
-          "element": "- textbox",
-          "issue": "Form field is unlabelled",
-          "severity": "high"
-        },
+          "element": "- img",
+          "issue": "No alt text provided for image",
+          "severity": "medium"
+        }
+      ]
+    },
+    {
+      "url": "https://www.google.com/imghp?hl=en&ogbl",
+      "title": "Google Images",
+      "score": 95,
+      "issueCount": 1,
+      "issues": [
         {
-          "element": "- textbox",
-          "issue": "Form field is unlabelled",
-          "severity": "high"
-        },
-        {
-          "element": "- textbox: John",
-          "issue": "Form field is unlabelled",
-          "severity": "high"
-        },
-        {
-          "element": "- textbox: Doe",
-          "issue": "Form field is unlabelled",
-          "severity": "high"
+          "element": "- img",
+          "issue": "No alt text provided for image",
+          "severity": "medium"
         }
       ]
     }
