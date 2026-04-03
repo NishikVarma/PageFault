@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PageFault Report</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: monospace; background: #0f0f0f; color: #e0e0e0; padding: 2rem; }
+        h1 { color: #ff4444; font-size: 2rem; margin-bottom: 0.5rem; }
+        .meta { color: #888; margin-bottom: 2rem; font-size: 0.9rem; }
+        .page-card { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .page-title { font-size: 1.1rem; font-weight: bold; }
+        .page-url { color: #888; font-size: 0.8rem; margin-top: 0.2rem; }
+        .score { font-size: 1.5rem; font-weight: bold; }
+        .score.high { color: #44ff88; }
+        .score.medium { color: #ffaa44; }
+        .score.low { color: #ff4444; }
+        .issue { padding: 0.5rem 0.75rem; margin: 0.4rem 0; border-radius: 4px; font-size: 0.85rem; border-left: 3px solid; }
+        .issue.high { background: #2a1515; border-color: #ff4444; }
+        .issue.medium { background: #2a2015; border-color: #ffaa44; }
+        .issue.low { background: #1a1a2a; border-color: #4488ff; }
+        .issue-label { font-weight: bold; margin-bottom: 0.2rem; }
+        .issue-element { color: #aaa; font-size: 0.8rem; }
+        .no-issues { color: #44ff88; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <h1>PageFault</h1>
+    <div class="meta">
+        Generated: {{generatedAt}} &nbsp;|&nbsp; Total Issues: {{totalIssues}} &nbsp;|&nbsp; Pages Crawled: {{pageCount}}
+    </div>
+    {{pages}}
+</body>
+</html>

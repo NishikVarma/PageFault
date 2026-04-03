@@ -11,6 +11,7 @@ import {
   detectHeadingHeirarchyViolation,
   detectUnlabelledFormFields,
 } from "./detectors/index";
+import { generateHTML } from "./reporter";
 
 import fs from "fs";
 const filePath = "../bug-hygiene-engine/reports/report.json";
@@ -96,6 +97,8 @@ const detectors = [
     console.log("Error writing file: " + err);
   }
 
+  const html = generateHTML(report);
+  fs.writeFileSync('./reports/report.html', html);
   await browser.close();
 })();
 

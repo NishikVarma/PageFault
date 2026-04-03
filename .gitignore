@@ -9,3 +9,4 @@ tests/
 /playwright/.auth/
 .env
 /src/ex.ts
+reports/
