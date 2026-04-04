@@ -17,3 +17,9 @@ export interface Report {
   totalIssues: number;
   pages: PageReport[];
 }
+
+export interface CrawledPage {
+    url: string;
+    title: string;
+    snapshot: string;
+}

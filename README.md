@@ -1,43 +1,85 @@
 # PageFault
 
-> A rule-based web accessibility and hygiene engine that autonomously crawls, analyzes, and classifies defects — essentially a self-driven QA inspector.
+> A multi-agent web accessibility and hygiene engine that autonomously crawls, analyzes, and classifies defects — essentially a self-driven QA inspector.
 
 ---
 
 ## What is this?
 
-PageFault crawls any web page, grabs its ARIA accessibility snapshot, and runs it through a set of rule-based detectors to find bugs and hygiene issues.
+PageFault crawls any web page, grabs its ARIA accessibility snapshot, runs it through rule-based detectors, and then passes it to a local LLM for holistic UX analysis. Each page gets a hygiene score based on issue density and severity.
 
-No vision models. No screenshots. Just structured analysis of what the browser actually exposes — keeping LLM usage minimal and rule-based detection maximal.
+No screenshots. No vision models. Just structured analysis of what the browser actually exposes — rule-based detection first, LLM augmentation second.
 
 ---
 
-## How it works
+## Architecture
 
-1. **Crawl** — Playwright launches a browser, navigates to each URL, and captures the page's ARIA snapshot — a structured, human-readable tree of every accessible element on the page.
+PageFault is built as a pipeline of five agents, orchestrated by `crawler.ts`:
+```
+CrawlerAgent → DetectorAgent → AnalyzerAgent → ScorerAgent → ReporterAgent
+```
 
-2. **Detect** — The snapshot is passed through rule-based detector functions. Each detector looks for a specific pattern and pushes structured issues into a shared array.
+1. **CrawlerAgent** — Playwright launches a browser, navigates each URL, captures the ARIA snapshot, and follows internal links up to a configurable depth limit.
 
-3. **Classify** — Issues are tagged by type and element, building toward a structured Defect Knowledge Graph linking pages → elements → issue types → severity.
+2. **DetectorAgent** — The snapshot is passed through 8 rule-based detectors. Fast, reliable, zero hallucination. Runs on the full snapshot.
 
-4. **Report** — Issues are output as structured JSON, each with:
-   ```json
-   {
-     "url": "https://example.com",
-     "element": "- link \"hidden\":",
-     "issue": "Non-descriptive link label"
-   }
-   ```
+3. **AnalyzerAgent** — A local LLM (Mistral via Ollama) analyzes the snapshot holistically for issues rules can't catch — confusing navigation structure, missing calls to action, illogical content hierarchy, poor semantic flow. Runs on the first 4000 characters of the snapshot (deliberate tradeoff — partial coverage with full context is preferred over chunked coverage with fragmented context for holistic analysis).
 
-### Current Detectors
+4. **ScorerAgent** — Computes a hygiene score per page: 100 base, -10 per high severity issue, -5 per medium, -2 per low. Minimum 0.
+
+5. **ReporterAgent** — Outputs structured JSON and an HTML report to `reports/`.
+
+---
+
+## Detectors
 
 | Detector | What it catches |
 |---|---|
-| `detectVagueLinkText` | Links with non-descriptive labels like "hidden", "click here" |
+| `detectVagueLinkText` | Links with non-descriptive labels like "click here", "read more" |
 | `detectMissingDescription` | Images with no alt text, links with no readable label |
 | `detectBrokenLinks` | Empty URLs or `javascript:void(0)` links |
 | `detectButtonWithNoTextLabels` | Buttons with empty or missing label text |
 | `detectLinkWithDuplicateValues` | Same link label pointing to different URLs |
+| `detectHeadingHierarchyViolation` | Headings that skip levels (h1 → h3) |
+| `detectMultipleH1` | Pages with more than one h1 |
+| `detectUnlabelledFormFields` | Form inputs with no associated label |
+
+---
+
+## Usage
+
+**Prerequisites:**
+- Node.js
+- [Ollama](https://ollama.com) running locally with Mistral pulled:
+```bash
+  ollama pull mistral
+```
+
+**Install:**
+```bash
+npm install
+npx playwright install firefox
+```
+
+**Run:**
+```bash
+npx tsx src/crawler.ts <url> --depth <n>
+```
+
+Example:
+```bash
+npx tsx src/crawler.ts https://example.com --depth 2
+```
+
+Reports are written to `reports/report.json` and `reports/report.html`.
+
+---
+
+## Deliberate Tradeoffs
+
+- **Rule-based first, LLM second** — detectors run on the full snapshot with guaranteed output. The LLM is additive, not a replacement. If the LLM fails, the engine still produces a complete report.
+- **4000 char snapshot truncation** — local models lose instruction-following ability on large contexts. Truncation trades coverage for reliability. Full snapshot support planned with cloud model integration.
+- **Graceful degradation** — LLM failures are caught and retried up to 3 times. On exhaustion, the page report is built from rule-based results only.
 
 ---
 
@@ -45,26 +87,22 @@ No vision models. No screenshots. Just structured analysis of what the browser a
 
 | Area | Status |
 |---|---|
-| Bug Detection | 🟡 In progress |
-| Hygiene Classification | 🟡 Partial |
-| Quality Engineering | 🟡 Partial |
-| Autonomous Discovery | ⬜ Planned |
-| AI Agents | ⬜ Planned |
-| Testing Performance | ⬜ Planned |
-| Mobile Applications | ⬜ Planned |
-| Defect Scoring | ⬜ Planned |
-| Visualization | ⬜ Planned |
+| Bug Detection | 🟢 8 detectors live |
+| Hygiene Scoring | 🟢 Severity-weighted per page |
+| Autonomous Discovery | 🟢 Depth-configurable crawling |
+| AI Agents | 🟢 5-agent pipeline with local LLM |
+| HTML Reporting | 🟢 Template-based report generation |
+| Defect Knowledge Graph | ⬜ Planned (Neo4j) |
+| Visualization Dashboard | ⬜ Planned |
+| Mobile Testing | ⬜ Planned |
 
 ---
 
 ## Roadmap
 
-- [ ] More rule-based detectors (heading hierarchy, form labels, multiple h1s)
-- [ ] JSON/HTML report file output
-- [ ] Hygiene score per page based on issue density and type mix
-- [ ] Autonomous link discovery — crawl pages found on a root URL automatically
-- [ ] Defect Knowledge Graph: pages → elements → issue types → severity
-- [ ] LLM layer for subjective issues (navigation logic, content quality) — minimal usage
+- [ ] Neo4j knowledge graph: pages → elements → issue types → severity
+- [ ] Detector fine-tuning to reduce false positives
+- [ ] Cloud model support for full snapshot analysis
 - [ ] Visualization dashboard
 - [ ] Mobile testing support
 
@@ -73,8 +111,8 @@ No vision models. No screenshots. Just structured analysis of what the browser a
 ## Stack
 
 - [Playwright](https://playwright.dev) — browser automation + ARIA snapshots
+- [Ollama](https://ollama.com) + Mistral — local LLM for holistic UX analysis
 - TypeScript — because types catch bugs before runtime does
+- Commander — CLI interface
 
----
-
-*Built from scratch as a learning project. Every detector was written by hand — no AI-generated logic.*
+*Built from scratch as a learning project. Every detector was written by hand - no AI-generated logic.*
