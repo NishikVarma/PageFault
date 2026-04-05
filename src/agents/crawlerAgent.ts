@@ -24,7 +24,7 @@ export async function crawl(seedUrl: string, maxDepth: number): Promise<CrawledP
             const title = await page.title();
             const snapshot = await page.locator("body").ariaSnapshot();
 
-            console.log(`  ✓ ${title}`);
+            console.log(`  ✓ ${url}`);
             results.push({ url, title, snapshot });
 
             if (depth < maxDepth) {

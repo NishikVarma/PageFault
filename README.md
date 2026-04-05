@@ -75,6 +75,25 @@ Reports are written to `reports/report.json` and `reports/report.html`.
 
 ---
 
+## Sample Output
+
+```json
+{
+  "url": "https://quotes.toscrape.com",
+  "score": 88,
+  "issueCount": 3,
+  "issues": [
+    {
+      "element": "- link \"(about)\":",
+      "issue": "Duplicate link label pointing to different URLs",
+      "severity": "medium"
+    }
+  ]
+}
+```
+
+---
+
 ## Deliberate Tradeoffs
 
 - **Rule-based first, LLM second** — detectors run on the full snapshot with guaranteed output. The LLM is additive, not a replacement. If the LLM fails, the engine still produces a complete report.
@@ -115,4 +134,15 @@ Reports are written to `reports/report.json` and `reports/report.html`.
 - TypeScript — because types catch bugs before runtime does
 - Commander — CLI interface
 
-*Built from scratch as a learning project. Every detector was written by hand - no AI-generated logic.*
+---
+
+## Screenshots
+
+- Crawling Webpages:
+![Initialization of PageFault and crawling of webpages](./Screenshots/terminal_output-1.png)
+
+- Detection and reporting of bugs:
+![Detection of Bugs and Reporting](./Screenshots/terminal_output-2.png)
+
+- Reports on localhost website and scoring of webpages:
+![Localhost report and webpage scoring](./Screenshots/localhost-page.png)
