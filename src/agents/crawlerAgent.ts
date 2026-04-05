@@ -24,7 +24,7 @@ export async function crawl(seedUrl: string, maxDepth: number): Promise<CrawledP
             const title = await page.title();
             const snapshot = await page.locator("body").ariaSnapshot();
 
-            console.log(`Checking: ${title}`);
+            console.log(`  ✓ ${title}`);
             results.push({ url, title, snapshot });
 
             if (depth < maxDepth) {
@@ -38,7 +38,7 @@ export async function crawl(seedUrl: string, maxDepth: number): Promise<CrawledP
                                 stack.push({ url: resolvedUrl.href, depth: depth + 1 });
                             }
                         } catch {
-                            // skip malformed URLs
+                            
                         }
                     }
                 }

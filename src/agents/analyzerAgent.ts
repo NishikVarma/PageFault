@@ -7,21 +7,16 @@ interface AnalyzerInput {
 }
 
 export async function analyze(input: AnalyzerInput): Promise<Issue[]> {
-    // 1. build the messages array (system prompt + user message)
-    // 2. fetch from ollama
-    // 3. parse the response
-    // 4. validate it's an array
-    // 5. retry if malformed, up to N times
-    // 6. return issues or empty array
     const url = input.url;
     const issues = input.issues;
     const snapshot = input.truncatedSnapshot;
+    const uniqueIssueStrings = [...new Set(issues.map(i => `- ${i.issue}`))].join("\n");
 
     const userMessage = `
         Page URL: ${url}
 
         Already Detected Issues:
-        ${issues.map(i => `- ${i.issue}`).join("\n")}
+        ${uniqueIssueStrings}
 
         ARIA Snapshot:
         ${snapshot}
@@ -60,11 +55,15 @@ Severity guide:
 
             const data = await response.json() as any;
             const text = data.choices[0].message.content;
-            console.log("Raw LLM response:", text.substring(0, 300));
+            
             const cleaned = text.replace(/```json|```/g, "").trim();
-            const match = text.match(/\[[\s\S]*\]/);
-            if (!match) throw new Error("No JSON array found in response");
-            const parsed = JSON.parse(cleaned);
+
+            const start = cleaned.indexOf("[");
+            const end = cleaned.lastIndexOf("]");
+            if (start === -1 || end === -1) throw new Error("No JSON array found");
+
+            const jsonString = cleaned.substring(start, end + 1);
+            const parsed = JSON.parse(jsonString);
 
             if (!Array.isArray(parsed)) throw new Error("Not an array");
 
@@ -74,16 +73,11 @@ Severity guide:
                 ["high", "medium", "low"].includes(item.severity)
             );
 
-            const normalizeSeverity = (s: string) => {
-                if (s === "medum" || s === "med") return "medium";
-                return s;
-            }
-
-            return validIssues; // success, exit early
+            return validIssues; 
         } catch (err) {
-            console.warn(`Analyzer attempt ${attempt + 1} failed:`, err);
+            if (attempt === 2) console.warn(`  ⚠ LLM analysis failed for ${url} — skipping`);
         }
     }
 
-    return []; // all retries exhausted
+    return []; 
 }

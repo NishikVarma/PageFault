@@ -10,9 +10,6 @@ import { crawl } from "./agents/crawlerAgent";
 
 import { generateHTML } from "./reporter";
 
-import fs from "fs";
-const filePath = "../bug-hygiene-engine/reports/report.json";
-
 program
   .argument('<url>', 'URL to crawl')
   .option('-d, --depth <number>', 'crawl number', '1')
@@ -21,30 +18,33 @@ program
 const url = program.args[0];
 const maxdepth = parseInt(program.opts().depth);
 
-const stack = [{url, depth: 0}];
-const visited = new Set<string>();
-
 (async () => {
-  console.log(`Crawling automatically till depth = ${maxdepth}`);
-  const browser = await firefox.launch();
-  const page = await browser.newPage();
+  console.log(`\n PageFault — Web Accessibility Engine`);
+  console.log(`  Target : ${url}`);
+  console.log(`  Depth  : ${maxdepth}\n`);
   
   const crawledPages = await crawl(url, maxdepth);
+
+  if(crawledPages.length==1 || crawledPages.length == 0) console.log(`Discovered ${crawledPages.length} page...`);
+  else console.log(`Discovered ${crawledPages.length} page...`);
+
+  
   const pages: PageReport[] = [];
   var totIssue = 0;
 
   for (const crawledPage of crawledPages) {
     const { url, title, snapshot } = crawledPage;
-    
     const pageIssues: Issue[] = detectIssues(snapshot);
+    console.log(`  ↳ Analyzing ${url}`);
 
-    console.log(`Running LLM analysis on ${url}...`);
     const MAX_CHARS = 4000;
     const truncatedSnapshot = snapshot.length > MAX_CHARS
         ? snapshot.substring(0, snapshot.lastIndexOf("\n", MAX_CHARS)) + "\n...[truncated]"
         : snapshot;
     const llmIssues = await analyze({ url, truncatedSnapshot, issues: pageIssues });
-    console.log(`LLM found ${llmIssues.length} additional issues`);
+
+    console.log(`    ✓ ${pageIssues.length} issues detected`);
+
 
     pageIssues.push(...llmIssues);
 
@@ -59,4 +59,7 @@ const visited = new Set<string>();
   }
 
   genReport(pages, totIssue);
+  console.log(`\n  Report saved → reports/report.html`);
+  console.log(`  Total issues : ${totIssue}`);
+  console.log(`  Pages scanned: ${pages.length}\n`);
 })();

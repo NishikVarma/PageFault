@@ -36,6 +36,8 @@ export function detectLinkWithDuplicateValues(
 ) {
   const lines = snapshot.split("\n");
   const map = new Map<string, string>();
+  const reported = new Set<string>();
+
 
   for (let i = 0; i < lines.length - 1; i++) {
     if (lines[i].includes("- link")) {
@@ -51,16 +53,20 @@ export function detectLinkWithDuplicateValues(
         continue;
       }
 
+      const normalizeUrl = (url: string) => 
+          url.replace(/\/page\/1\/?$/, "").replace(/\/$/, "");
+
       if (!map.has(linkLabel)) {
-        map.set(linkLabel, urlValue);
+          map.set(linkLabel, normalizeUrl(urlValue));
       } else {
-        if (map.get(linkLabel) !== urlValue) {
-          issues.push({
-            element: lines[i].trim(),
-            issue: "Duplicate link label pointing to different URLs",
-            severity: "medium"
-          });
-        }
+          if (map.get(linkLabel) !== normalizeUrl(urlValue) && !reported.has(linkLabel)) {
+              issues.push({
+                  element: lines[i].trim(),
+                  issue: "Duplicate link label pointing to different URLs",
+                  severity: "medium"
+              });
+              reported.add(linkLabel);
+          }
       }
     }
   }
